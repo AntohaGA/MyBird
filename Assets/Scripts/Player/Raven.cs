@@ -1,29 +1,37 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AcornGenerator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(InputReader))]
-[RequireComponent(typeof(RotatorZ))]
+[RequireComponent(typeof(RavenRotator))]
 [RequireComponent(typeof(RavenCollisionHandler))]
 public class Raven : MonoBehaviour, IInteractable
 {
     private Vector3 _startPosition;
-    private RotatorZ _rotatorZ;
+    private RavenRotator _rotatorZ;
     private RavenCollisionHandler _collisionHandler;
+    public AcornGenerator _acornGenerator { get; private set; }
+
     public Rigidbody2D Rigidbody2D { get; private set; }
     public float TapForce { get; private set; } = 4;
     public float Speed { get; private set; } = 0;
-    public float RotationSpeed { get; private set; } = 4;
-    public float MinRotationZ { get; private set; } = -40;
-    public float MaxRotationZ { get; private set; } = 40;
+    public float RotationSpeed { get; private set; } = 3;
+    public float MinRotationZ { get; private set; } = -50;
+    public float MaxRotationZ { get; private set; } = 50;
     public Quaternion MinRotation { get; private set; }
     public Quaternion MaxRotation { get; private set; }
+    public float SpeedBullet { get; private set; } = 5;
 
+    private void Awake()
+    {
+        Rigidbody2D = GetComponent<Rigidbody2D>();
+        _rotatorZ = GetComponent<RavenRotator>();
+        _collisionHandler = GetComponent<RavenCollisionHandler>();
+        _acornGenerator = GetComponent<AcornGenerator>();
+    }
     private void Start()
     {
         _startPosition = transform.position;
-        Rigidbody2D = GetComponent<Rigidbody2D>();
-        _rotatorZ = GetComponent<RotatorZ>();
-        _collisionHandler = GetComponent<RavenCollisionHandler>();
         MinRotation = Quaternion.Euler(0, 0, MinRotationZ);
         MaxRotation = Quaternion.Euler(0, 0, MaxRotationZ);
         Reset();
@@ -52,7 +60,11 @@ public class Raven : MonoBehaviour, IInteractable
         }
         else if (interactable is Ground)
         {
-            Debug.Log("You touch an Ground!!!");
+            Debug.Log("You touch Ground!!!");
+        }
+        else if (interactable is Bullet)
+        {
+            Debug.Log("You touch Bullet!!!");
         }
     }
 

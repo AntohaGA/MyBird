@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private float _upperOffset;
     [SerializeField] private Owl _prefab;
     [SerializeField] PoolEnemies _pool;
+    private float _enemySpeed = 2;
+    private Vector3 _direction = new Vector3(-1f, 0f, 0f);
+
+    public event Action<Owl> OwlCreated;
+    public event Action<Owl> OwlDestroyed;
 
     private void Start()
     {
@@ -31,19 +37,18 @@ public class EnemyGenerator : MonoBehaviour
 
     private void Spawn()
     {
-        float spawnPositionY = Random.Range(_lowerOffset, _upperOffset) + transform.position.y;
-
+        float spawnPositionY = UnityEngine.Random.Range(_lowerOffset, _upperOffset) + transform.position.y;
         Vector3 spawnPoint = new Vector3(transform.position.x, spawnPositionY, transform.position.z);
-
         Owl owl = _pool.GetInstance();
-
-        owl.transform.position = spawnPoint;
+        owl.Init(spawnPoint, _enemySpeed, _direction);
+        OwlCreated?.Invoke(owl);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.TryGetComponent(out Owl owl))
         {
+            OwlDestroyed?.Invoke(owl);
             _pool.ReturnInstance(owl);
         }
     }

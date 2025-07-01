@@ -9,7 +9,7 @@ public class InputReader : MonoBehaviour
     private const KeyCode Attack = KeyCode.F;
 
     private ICommand _tap = new Tap();
-    private ICommand _fire = new Fire();
+    private ICommand _fire;
 
     private void Awake()
     {
@@ -25,6 +25,7 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(Attack))
         {
+            _fire = new FireCommand(_raven);
             _fire.Execute(_raven);
         }
     }

@@ -14,7 +14,6 @@ public class RavenCollisionHandler : MonoBehaviour
     {
         if (other.TryGetComponent(out IInteractable interactable))
         {
-            Debug.Log("interactable - " + interactable);
             CollisionDetected?.Invoke(interactable);
         }
     }

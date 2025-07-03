@@ -23,9 +23,9 @@ public class PoolObject<T> : MonoBehaviour where T : MonoBehaviour
         return _pool.Get();
     }
 
-    public void ReturnInstance(T figure)
+    public void ReturnInstance(T poolObject)
     {
-        _pool.Release(figure);
+        _pool.Release(poolObject);
     }
 
     public int GetCountObjectsInPool()
@@ -33,23 +33,28 @@ public class PoolObject<T> : MonoBehaviour where T : MonoBehaviour
         return _pool.CountAll;
     }
 
+    public void Reset()
+    {
+        _pool.Clear();
+    }
+
     private T CreateInstance()
     {
         return Instantiate(_prefab);
     }
 
-    private void TakeFromPool(T figure)
+    private void TakeFromPool(T poolObject)
     {
-        figure.gameObject.SetActive(true);
+        poolObject.gameObject.SetActive(true);
     }
 
-    private void ReturnToPool(T figure)
+    private void ReturnToPool(T poolObject)
     {
-        figure.gameObject.SetActive(false);
+        poolObject.gameObject.SetActive(false);
     }
 
-    private void DestroyInstance(T figure)
+    private void DestroyInstance(T poolObject)
     {
-        Destroy(figure.gameObject);
+        Destroy(poolObject.gameObject);
     }
 }

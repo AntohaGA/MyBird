@@ -2,9 +2,18 @@ using UnityEngine;
 
 public class Tap : ICommand
 {
+    private float _tapForce = 4;
+    private float _maxRotationZ = 50;
+    private Quaternion _maxRotation;
+
+    public Tap()
+    {
+        _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
+    }
+
     public void Execute(Raven raven)
     {
-        raven.Rigidbody2D.linearVelocity = new Vector2(0, raven.TapForce);
-        raven.Rigidbody2D.transform.rotation = raven.MaxRotation;
+        raven.Rigidbody2D.linearVelocity = new Vector2(0, _tapForce);
+        raven.Rigidbody2D.transform.rotation = _maxRotation;
     }
 }

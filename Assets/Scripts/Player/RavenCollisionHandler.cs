@@ -1,20 +1,21 @@
 using System;
-using UnityEngine;
 
-public class RavenCollisionHandler : MonoBehaviour
+public class RavenCollisionHandler : CollisionHandler
 {
-    public event Action<IInteractable> CollisionDetected;
+    public event Action RavenDamaged;
 
-    private void OnValidate()
+    protected override void ProcessCollision(IInteractable interactable)
     {
-        GetComponent<Collider2D>().isTrigger = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out IInteractable interactable))
+        switch (interactable)
         {
-            CollisionDetected?.Invoke(interactable);
+            case Owl:
+            case Ground:
+                RavenDamaged?.Invoke();
+                break;
+
+            case Bullet bullet when bullet.LayerMask == EnemyMask:
+                RavenDamaged?.Invoke();
+                break;
         }
     }
 }

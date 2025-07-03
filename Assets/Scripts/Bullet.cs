@@ -6,10 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(Mover))]
 public class Bullet : MonoBehaviour, IInteractable
 {
+    private const float LifeTime = 3f;
     private SpriteRenderer _spriteRenderer;
-    private Coroutine DelayToDestroyCoroutine;
-    private WaitForSeconds _delayToDestroy;
+    private Coroutine _delayToDestroyCoroutine;
+    private WaitForSeconds _lifeTimeWait;
     private Mover _mover;
+
+    public LayerMask LayerMask { get ; private set; }
 
     public event Action<Bullet> Destroyed;
 
@@ -19,24 +22,31 @@ public class Bullet : MonoBehaviour, IInteractable
         _mover = GetComponent<Mover>();
     }
 
-    public void Init(Vector3 spawnPosition, Sprite sprite, float speed, Vector3 direction)
+    public void Init(LayerMask type, Vector3 spawnPosition, Sprite sprite, float speed, Vector3 direction)
     {
+        LayerMask = type;
         _spriteRenderer.sprite = sprite;
         transform.position = spawnPosition;
         _mover.Move(direction, speed);
 
-        _delayToDestroy = new WaitForSeconds(3);
+        _lifeTimeWait = new WaitForSeconds(LifeTime);
 
-        if (DelayToDestroyCoroutine != null)
-            StopCoroutine(DelayToDestroyCoroutine);
+        if (_delayToDestroyCoroutine != null)
+            StopCoroutine(_delayToDestroyCoroutine);
 
-        DelayToDestroyCoroutine = StartCoroutine(LifeBullet());
+        _delayToDestroyCoroutine = StartCoroutine(LifeBullet());
     }
 
     private IEnumerator LifeBullet()
     {
-        yield return _delayToDestroy;
+        yield return _lifeTimeWait;
 
         Destroyed?.Invoke(this);
+    }
+
+    private void Reset()
+    {
+        if (_delayToDestroyCoroutine != null)
+            StopCoroutine(_delayToDestroyCoroutine);
     }
 }

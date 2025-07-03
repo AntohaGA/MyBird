@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3036005081953126792}
   - component: {fileID: -8245838393942784111}
   - component: {fileID: 1601099406660445102}
+  - component: {fileID: 2958245355402313557}
+  - component: {fileID: 7916468363346540328}
   m_Layer: 0
   m_Name: Owl
   m_TagString: Untagged
@@ -167,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108409df58ccbd04d82ff9577d4b1253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteBullet: {fileID: -1834823487507027321, guid: 8e96f56738cbfee42a48ee458cecdab6, type: 3}
 --- !u!114 &1601099406660445102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,4 +181,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7770f80d66acad748b53e3aee4058364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
+--- !u!114 &2958245355402313557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367660338984005324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28ed8f90b6bb16544ab0a9137491e086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7916468363346540328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6367660338984005324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 960807d95dee3bf4a90f914c9210f785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyMask:
+    serializedVersion: 2
+    m_Bits: 64

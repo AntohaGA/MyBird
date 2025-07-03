@@ -1,20 +1,14 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Raven))]
 public class InputReader : MonoBehaviour
 {
-    private Raven _raven;
-
     private const KeyCode Tap = KeyCode.Space;
     private const KeyCode Attack = KeyCode.F;
 
-    private ICommand _tap = new Tap();
-    private ICommand _fire;
+    [SerializeField] private Raven _raven;
 
-    private void Awake()
-    {
-        _raven = GetComponent<Raven>();
-    }
+    private Tap _tap = new Tap();
+    private Fire _fire = new Fire();
 
     private void Update()
     {
@@ -25,7 +19,6 @@ public class InputReader : MonoBehaviour
 
         if (Input.GetKeyDown(Attack))
         {
-            _fire = new FireCommand(_raven);
             _fire.Execute(_raven);
         }
     }

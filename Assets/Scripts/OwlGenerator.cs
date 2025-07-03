@@ -3,27 +3,33 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class EnemyGenerator : MonoBehaviour
+[RequireComponent(typeof(PoolOwls))]
+public class OwlGenerator : MonoBehaviour
 {
     [SerializeField] private float _delay;
     [SerializeField] private float _lowerOffset;
     [SerializeField] private float _upperOffset;
     [SerializeField] private Owl _prefab;
-    [SerializeField] PoolEnemies _pool;
+    [SerializeField] private PoolOwls _pool;
+
     private float _enemySpeed = 2;
     private Vector3 _direction = new Vector3(-1f, 0f, 0f);
 
     public event Action<Owl> OwlCreated;
     public event Action<Owl> OwlDestroyed;
 
-    private void Start()
+    private void Awake()
     {
-        _pool = GetComponent<PoolEnemies>();
+        _pool = GetComponent<PoolOwls>();
         _pool.Init(10, 100, _prefab);
-        StartCoroutine(GenerateEnemies());
     }
 
-    private IEnumerator GenerateEnemies()
+    private void Start()
+    {
+        StartCoroutine(GenerateOwls());
+    }
+
+    private IEnumerator GenerateOwls()
     {
         var wait = new WaitForSeconds(_delay);
 
@@ -39,8 +45,10 @@ public class EnemyGenerator : MonoBehaviour
     {
         float spawnPositionY = UnityEngine.Random.Range(_lowerOffset, _upperOffset) + transform.position.y;
         Vector3 spawnPoint = new Vector3(transform.position.x, spawnPositionY, transform.position.z);
+
         Owl owl = _pool.GetInstance();
         owl.Init(spawnPoint, _enemySpeed, _direction);
+        owl.OwlShoted += ReturnOwl;
         OwlCreated?.Invoke(owl);
     }
 
@@ -48,8 +56,19 @@ public class EnemyGenerator : MonoBehaviour
     {
         if(other.TryGetComponent(out Owl owl))
         {
-            OwlDestroyed?.Invoke(owl);
-            _pool.ReturnInstance(owl);
+            ReturnOwl(owl);
         }
+    }
+
+    private void ReturnOwl(Owl owl)
+    {
+        owl.OwlShoted -= ReturnOwl;
+        OwlDestroyed?.Invoke(owl);
+        _pool.ReturnInstance(owl);
+    }
+
+    public void Reset()
+    {
+        _pool.Reset();
     }
 }

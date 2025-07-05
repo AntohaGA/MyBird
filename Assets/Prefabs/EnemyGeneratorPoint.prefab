@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6588422986422347594}
   - component: {fileID: 1376225686806731398}
-  - component: {fileID: 6169899539324853695}
   - component: {fileID: 2224229868673276678}
   - component: {fileID: 4472060108098675338}
   - component: {fileID: 2978371759176828636}
   - component: {fileID: 2708868038694541764}
+  - component: {fileID: 9130962935525004709}
   m_Layer: 0
   m_Name: EnemyGeneratorPoint
   m_TagString: Untagged
@@ -83,23 +83,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6169899539324853695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8975398355840191824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474d247920001d342b5b1be1bfd44479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2176328781158541930, guid: fc17605dd29f9bd46a4ad5236549d660, type: 3}
-  bulletSprite: {fileID: -1834823487507027321, guid: 8e96f56738cbfee42a48ee458cecdab6, type: 3}
-  bulletMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &2224229868673276678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +136,15 @@ MonoBehaviour:
   _lowerOffset: -3.5
   _upperOffset: 3.5
   _prefab: {fileID: -8245838393942784111, guid: 98fbc16387558cd43995145719d22eda, type: 3}
+--- !u!114 &9130962935525004709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975398355840191824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f2b6f92f453ff546a545e395ced5bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

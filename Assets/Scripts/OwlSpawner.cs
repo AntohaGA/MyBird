@@ -4,8 +4,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(OwlGenerator))]
-[RequireComponent(typeof(EggSpawner))]
 [RequireComponent(typeof(ScoreCounter))]
+[RequireComponent(typeof(EggSpawner))]
 public class OwlSpawner : MonoBehaviour
 {
     private const int PoolCapacity = 10;
@@ -18,8 +18,8 @@ public class OwlSpawner : MonoBehaviour
 
     private OwlGenerator _owlGenerator;
     private PoolOwls _pool;
-    private EggSpawner _eggSpawner;
     private ScoreCounter _scoreCounter;
+    private EggSpawner _eggSpawner;
 
     private Vector3 _leftDirection = new(-1f, 0f, 0f);
 
@@ -29,14 +29,15 @@ public class OwlSpawner : MonoBehaviour
     private void Awake()
     {
         _owlGenerator = GetComponent<OwlGenerator>();
-        _eggSpawner = GetComponent<EggSpawner>();
         _scoreCounter = GetComponent<ScoreCounter>();
+        _eggSpawner = GetComponent<EggSpawner>();
         _pool = transform.AddComponent<PoolOwls>();
         _pool.Init(PoolCapacity, PoolMaxSize, _prefab);
     }
 
     private void OnEnable()
     {
+        _owlGenerator.GenerateOwls();
         _owlGenerator.OwlGenerated += Spawn;
     }
 
@@ -51,7 +52,7 @@ public class OwlSpawner : MonoBehaviour
         Vector3 spawnPoint = new(transform.position.x, spawnPositionY, transform.position.z);
 
         Owl owl = _pool.GetInstance();
-        owl.Init(spawnPoint, EnemySpeed, _leftDirection);
+        owl.Init(spawnPoint, EnemySpeed, _leftDirection, _eggSpawner);
         owl.OwlShoted += ReturnOwl;
         OwlCreated?.Invoke(owl);
     }
@@ -75,7 +76,7 @@ public class OwlSpawner : MonoBehaviour
     public void Reset()
     {
         _pool.ClearPool();
-        _eggSpawner.Reset();
         _scoreCounter.Reset();
+        _eggSpawner.Reset();
     }
 }

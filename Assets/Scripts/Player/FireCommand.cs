@@ -1,4 +1,4 @@
-public class Fire : ICommand
+public class FireCommand : ICommand
 {
     public void Execute(Raven raven)
     {

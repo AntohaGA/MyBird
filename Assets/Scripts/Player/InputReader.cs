@@ -7,19 +7,19 @@ public class InputReader : MonoBehaviour
 
     [SerializeField] private Raven _raven;
 
-    private Tap _tap = new Tap();
-    private Fire _fire = new Fire();
+    private TapCommand _tapCommand = new TapCommand();
+    private FireCommand _fireCommand = new FireCommand();
 
     private void Update()
     {
         if (Input.GetKeyDown(Tap))
         {
-            _tap.Execute(_raven);
+            _tapCommand.Execute(_raven);
         }
 
         if (Input.GetKeyDown(Attack))
         {
-            _fire.Execute(_raven);
+            _fireCommand.Execute(_raven);
         }
     }
 }

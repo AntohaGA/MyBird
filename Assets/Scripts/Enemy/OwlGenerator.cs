@@ -9,12 +9,12 @@ public class OwlGenerator : MonoBehaviour
 
     public event Action OwlGenerated;
 
-    private void OnEnable()
+    public void GenerateOwls()
     {
-        StartCoroutine(GenerateOwls());
+        StartCoroutine(GeneratorOwls());
     }
 
-    private IEnumerator GenerateOwls()
+    private IEnumerator GeneratorOwls()
     {
         while (enabled)
         {

@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5afeaec2e75d14f95381bf76f91546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2176328781158541930, guid: fc17605dd29f9bd46a4ad5236549d660, type: 3}
-  bulletSprite: {fileID: -6706164723994672925, guid: 33c5e9f65ff8d9e478b89c7f2fd4a00e, type: 3}
-  bulletMask:
+  Prefab: {fileID: 2176328781158541930, guid: fc17605dd29f9bd46a4ad5236549d660, type: 3}
+  BulletSprite: {fileID: -6706164723994672925, guid: 33c5e9f65ff8d9e478b89c7f2fd4a00e, type: 3}
+  BulletMask:
     serializedVersion: 2
     m_Bits: 64

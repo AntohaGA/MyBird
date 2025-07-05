@@ -8,29 +8,28 @@ public class PoolObject<T> : MonoBehaviour where T : MonoBehaviour
     private int _poolMaxSize;
 
     private T _prefab;
-    private ObjectPool<T> _pool;
     private List<T> _activeObjects;
 
-    public ObjectPool<T> Pool => _pool;
+    public ObjectPool<T> Pool { get; private set; }
 
     public void Init(int poolCapacity, int poolMaxSize, T prefab)
     {
         _poolCapacity = poolCapacity;
         _poolMaxSize = poolMaxSize;
         _prefab = prefab;
-        _pool = new ObjectPool<T>(CreateInstance, TakeFromPool, ReturnToPool,
+        Pool = new ObjectPool<T>(CreateInstance, TakeFromPool, ReturnToPool,
                                   DestroyInstance, true, _poolCapacity, _poolMaxSize);
         _activeObjects = new List<T>();
     }
 
     public T GetInstance()
     {
-        return _pool.Get();
+        return Pool.Get();
     }
 
     public void ReturnInstance(T poolObject)
     {
-        _pool.Release(poolObject);
+        Pool.Release(poolObject);
     }
 
     private T CreateInstance()
@@ -61,9 +60,9 @@ public class PoolObject<T> : MonoBehaviour where T : MonoBehaviour
     {
         foreach (var activeObject in new List<T>(_activeObjects))
         {
-            _pool.Release(activeObject);
+            Pool.Release(activeObject);
         }
 
-        _pool.Clear();
+        Pool.Clear();
     }
 }

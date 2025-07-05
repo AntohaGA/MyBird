@@ -3,44 +3,39 @@ using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
 [RequireComponent(typeof(OwlCollisionHandler))]
-[RequireComponent(typeof(OwlsEggGenerator))]
+[RequireComponent(typeof(OwlEggGenerator))]
 public class Owl : MonoBehaviour, IInteractable
 {
     private Mover _mover;
-    private OwlsEggGenerator _owlEggGenerator;
     private OwlCollisionHandler _collisionHandler;
+    private OwlEggGenerator _generator;
+    private EggSpawner _eggSpawner;
 
-    public event Action<Vector3> MakedEgg;
     public event Action<Owl> OwlShoted;
 
     private void Awake()
     {
         _mover = GetComponent<Mover>();
-        _owlEggGenerator = GetComponent<OwlsEggGenerator>();
+        _generator = GetComponent<OwlEggGenerator>();
         _collisionHandler = GetComponent<OwlCollisionHandler>();
     }
 
     private void OnEnable()
     {
-        _owlEggGenerator.EggGenerated += MakeEgg;
         _collisionHandler.OwlShoted += OwlDestroy;
     }
 
     private void OnDisable()
     {
-        _owlEggGenerator.EggGenerated -= MakeEgg;
         _collisionHandler.OwlShoted -= OwlDestroy;
     }
 
-    public void Init(Vector3 spawn, float speed, Vector3 direction)
+    public void Init(Vector3 spawn, float speed, Vector3 direction, EggSpawner eggSpawner)
     {
         transform.position = spawn;
         _mover.Move(direction, speed);
-    }
-
-    private void MakeEgg(Vector3 position)
-    {
-        MakedEgg?.Invoke(position);  
+        _eggSpawner = eggSpawner;
+        _generator.GenerateEgg(_eggSpawner);
     }
 
     private void OwlDestroy()

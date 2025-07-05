@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 4562661693210333589}
   - component: {fileID: 5276117924765126736}
   - component: {fileID: 7550631767142755634}
-  - component: {fileID: 7198532845157876078}
   - component: {fileID: 1860654202823249748}
-  - component: {fileID: 516077616884206681}
+  - component: {fileID: 9061221747630271280}
+  - component: {fileID: 3325986744541430086}
   m_Layer: 0
   m_Name: Raven
   m_TagString: Untagged
@@ -197,18 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _raven: {fileID: 5276117924765126736}
---- !u!114 &7198532845157876078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8342331160803175621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad1dff6144975f4291eb5486cbc3cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1860654202823249748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +212,7 @@ MonoBehaviour:
   EnemyMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &516077616884206681
+--- !u!114 &9061221747630271280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,11 +221,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8342331160803175621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699947cf98f19574cb8e4981d7dca513, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ad1dff6144975f4291eb5486cbc3cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acorn: {fileID: 2176328781158541930, guid: fc17605dd29f9bd46a4ad5236549d660, type: 3}
-  _spriteAcorns: {fileID: -6706164723994672925, guid: 33c5e9f65ff8d9e478b89c7f2fd4a00e, type: 3}
-  _acornMask:
+--- !u!114 &3325986744541430086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8342331160803175621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5afeaec2e75d14f95381bf76f91546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2176328781158541930, guid: fc17605dd29f9bd46a4ad5236549d660, type: 3}
+  bulletSprite: {fileID: -6706164723994672925, guid: 33c5e9f65ff8d9e478b89c7f2fd4a00e, type: 3}
+  bulletMask:
     serializedVersion: 2
     m_Bits: 64

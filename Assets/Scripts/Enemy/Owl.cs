@@ -3,11 +3,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
 [RequireComponent(typeof(OwlCollisionHandler))]
-[RequireComponent(typeof(OwlEggGenerator))]
+[RequireComponent(typeof(OwlsEggGenerator))]
 public class Owl : MonoBehaviour, IInteractable
 {
     private Mover _mover;
-    private OwlEggGenerator _owlEggGenerator;
+    private OwlsEggGenerator _owlEggGenerator;
     private OwlCollisionHandler _collisionHandler;
 
     public event Action<Vector3> MakedEgg;
@@ -16,7 +16,7 @@ public class Owl : MonoBehaviour, IInteractable
     private void Awake()
     {
         _mover = GetComponent<Mover>();
-        _owlEggGenerator = GetComponent<OwlEggGenerator>();
+        _owlEggGenerator = GetComponent<OwlsEggGenerator>();
         _collisionHandler = GetComponent<OwlCollisionHandler>();
     }
 

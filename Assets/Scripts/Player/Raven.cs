@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AcornShooter))]
+[RequireComponent(typeof(AcornSpawner))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(InputReader))]
 [RequireComponent(typeof(RavenRotator))]
@@ -8,13 +8,13 @@ using UnityEngine;
 public class Raven : MonoBehaviour, IInteractable
 {
     private Vector3 _startPosition;
-    public AcornShooter AcornGenerator { get; private set; }
+    public AcornSpawner AcornSpawner { get; private set; }
     public Rigidbody2D Rigidbody2D { get; private set; }
 
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        AcornGenerator = GetComponent<AcornShooter>();
+        AcornSpawner = GetComponent<AcornSpawner>();
     }
 
     private void Start()
@@ -28,5 +28,6 @@ public class Raven : MonoBehaviour, IInteractable
         transform.position = _startPosition;
         transform.rotation = Quaternion.identity;
         Rigidbody2D.linearVelocity = Vector2.zero;
+        AcornSpawner.Reset();
     }
 }
